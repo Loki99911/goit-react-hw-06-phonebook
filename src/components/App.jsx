@@ -1,20 +1,23 @@
-import { useState} from 'react';
+// import { useState} from 'react';
 import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList ';
 // import { nanoid } from 'nanoid';
 // import { addContact, removeContact } from "../redux/contactsSlice"
+import { useSelector } from 'react-redux';
 
 export const App = () => {
-  const [contacts] = useState(() => {return (
-    JSON.parse(window.localStorage.getItem('lastState')) ?? [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ]
-  )});
-  const [filter, setFilter] = useState('');
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+  // const [contacts] = useState(() => {return (
+  //   JSON.parse(window.localStorage.getItem('lastState')) ?? [
+  //     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  //     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  //     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+  //     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  //   ]
+  // )});
+  // const [filter, setFilter] = useState('');
 
 //   useEffect(() => {
 //     localStorage.setItem('lastState', JSON.stringify(contacts));
@@ -33,9 +36,9 @@ export const App = () => {
   //   );
   // };
 
-  const filterInput = event => {
-    setFilter(event.currentTarget.value);
-  };
+  // const filterInput = event => {
+  //   setFilter(event.currentTarget.value);
+  // };
 
   const filterContact = () => {
     return contacts.filter(contact =>
@@ -58,7 +61,7 @@ export const App = () => {
       <ContactForm />
 
       <h2 style={{ margin: 0, padding: 0 }}>Contacts</h2>
-      <Filter filterInput={filter} onChange={filterInput} />
+      <Filter />
       <ContactList contacts={filterContact()} />
     </div>
   );

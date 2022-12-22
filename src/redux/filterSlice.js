@@ -5,9 +5,10 @@ export const filterSlice = createSlice({
   initialState: '',
   reducers: {
     filterContact: (state, action) => {
-      return state.filter(contact =>
-        contact.name.toLowerCase().includes(action.payload.toLowerCase())
-      );
+      return state = action.payload
+      // return state.filter(contact =>
+      //   contact.name.toLowerCase().includes(action.payload.toLowerCase())
+      // );
     },
   },
 });
