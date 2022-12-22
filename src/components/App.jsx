@@ -1,11 +1,12 @@
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList ';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
+import { addContact, removeContact } from "../redux/contactsSlice"
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {return (
+  const [contacts] = useState(() => {return (
     JSON.parse(window.localStorage.getItem('lastState')) ?? [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -15,22 +16,22 @@ export const App = () => {
   )});
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem('lastState', JSON.stringify(contacts));
-  }, [contacts]);
+//   useEffect(() => {
+//     localStorage.setItem('lastState', JSON.stringify(contacts));
+//   }, [contacts]);
 
-  const addNewContact = ({ name, number }) => {
-    if (contacts.find(contact => contact.name === name)) {
-      return alert(`${name} is already in contacts!`);
-    }
-    const contact = { id: nanoid(), name, number };
-    setContacts(prevContacts => [contact, ...prevContacts]);
-  };
+  // const addNewContact = ({ name, number }) => {
+  //   if (contacts.find(contact => contact.name === name)) {
+  //     return alert(`${name} is already in contacts!`);
+  //   }
+  //   const contact = { id: nanoid(), name, number };
+  //   setContacts(prevContacts => [contact, ...prevContacts]);
+  // };
 
-  const deleteContact = id => {
-    setContacts(prevContacts =>prevContacts.filter(contact => contact.id !== id)
-    );
-  };
+  // const deleteContact = id => {
+  //   setContacts(prevContacts =>prevContacts.filter(contact => contact.id !== id)
+  //   );
+  // };
 
   const filterInput = event => {
     setFilter(event.currentTarget.value);
@@ -54,11 +55,11 @@ export const App = () => {
       }}
     >
       <h1 style={{ margin: 0, padding: 0 }}>Phonebook</h1>
-      <ContactForm newContact={addNewContact} />
+      <ContactForm newContact={addContact} />
 
       <h2 style={{ margin: 0, padding: 0 }}>Contacts</h2>
       <Filter filterInput={filter} onChange={filterInput} />
-      <ContactList contacts={filterContact()} onClick={deleteContact} />
+      <ContactList contacts={filterContact()} onClick={removeContact} />
     </div>
   );
 };
