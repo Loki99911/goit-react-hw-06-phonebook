@@ -6,7 +6,7 @@ export const contactsSlice = createSlice({
   initialState: [],
   reducers: {
     addContact: (state, action) => {
-      const { name, number } = action;
+      const { name, number } = action.payload;
       if (state.find(contact => contact.name === name)) {
         return alert(`${name} is already in contacts!`);
       }
@@ -15,7 +15,7 @@ export const contactsSlice = createSlice({
     },
 
     removeContact: (state, action) => {
-      state.filter(contact => contact.id !== action);
+      return state.filter(contact => contact.id !== action);
     },
   },
 });

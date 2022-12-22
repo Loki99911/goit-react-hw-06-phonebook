@@ -3,7 +3,7 @@ import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList ';
 // import { nanoid } from 'nanoid';
-import { addContact, removeContact } from "../redux/contactsSlice"
+// import { addContact, removeContact } from "../redux/contactsSlice"
 
 export const App = () => {
   const [contacts] = useState(() => {return (
@@ -55,11 +55,11 @@ export const App = () => {
       }}
     >
       <h1 style={{ margin: 0, padding: 0 }}>Phonebook</h1>
-      <ContactForm newContact={addContact} />
+      <ContactForm />
 
       <h2 style={{ margin: 0, padding: 0 }}>Contacts</h2>
       <Filter filterInput={filter} onChange={filterInput} />
-      <ContactList contacts={filterContact()} onClick={removeContact} />
+      <ContactList contacts={filterContact()} />
     </div>
   );
 };
