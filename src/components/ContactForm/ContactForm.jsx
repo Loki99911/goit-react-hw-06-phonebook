@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { FormBlock, FormTitle, FormInput, FormBtn } from './ContactForm.styled';
 import { addContact } from '../../redux/contactsSlice';
 import { useDispatch } from 'react-redux';
