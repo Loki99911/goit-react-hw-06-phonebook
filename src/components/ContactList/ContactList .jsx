@@ -1,14 +1,23 @@
-import PropTypes from 'prop-types';
 import { ContactItem } from '../ContactItem/ContactItem';
 import { ListBlock } from './ContactList.styled';
 import { removeContact } from '../../redux/contactsSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = () => {
   const dispatch = useDispatch();
+
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+
+  const filterContact = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   return (
     <ListBlock>
-      {contacts.map(contact => {
+      {filterContact().map(contact => {
         const { id } = contact;
         return (
           <ContactItem
@@ -20,8 +29,4 @@ export const ContactList = ({ contacts }) => {
       })}
     </ListBlock>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.array.isRequired,
 };
